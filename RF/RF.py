@@ -2,6 +2,8 @@
 # -*- coding: utf-8 
 # 参考网络代码
 
+# 随机森林，划分为5份，决策树使用基尼指数法进行属性划分
+
 import io
 from csv import reader
 import requests #安装命令 pip install requests
