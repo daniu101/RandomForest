@@ -13,3 +13,4 @@ def load_csv(filename):
 filename = 'D:\sonar.all-data.csv'
 dataset = load_csv(filename)
 print(dataset)
+print(len(dataset))

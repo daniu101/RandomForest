@@ -74,6 +74,7 @@ def get_split(dataset):
 def to_terminal(group):
     outcomes = [row[-1] for row in group]
     return max(set(outcomes), key=outcomes.count)
+
 # 生成决策树
 def split(node, max_depth, min_size, depth):
     left, right = node['groups']
@@ -122,6 +123,7 @@ def predict(node, row):
 def decision_tree(train, test, max_depth, min_size):
     # 使用训练集构建一个决策树
     tree = build_tree(train, max_depth, min_size)
+    print(tree)
     predictions = list()
     # 使用决策树验证每个测试集的值
     for row in test:
@@ -143,6 +145,8 @@ def evaluate_algorithm(dataset, algorithm, n_folds, *args):
     folds = cross_validation_split(dataset, n_folds) #把数据分为n_folds份
 #     print(folds)
     scores = list() # 空list
+    
+    ################## 交叉验证法 ###################
     for fold in folds: # 循环每一个自助采样集
         train_set = list(folds)
         train_set.remove(fold)
@@ -152,6 +156,8 @@ def evaluate_algorithm(dataset, algorithm, n_folds, *args):
             row_copy = list(row)
             test_set.append(row_copy)
             row_copy[-1] = None
+    ################## 交叉验证法 ###################
+    
         # train_set 是移除 fold 后的集合
         # test_set 是 fold集合
         # algorithm=decision_tree，去调动决策树模型
@@ -166,7 +172,7 @@ def evaluate_algorithm(dataset, algorithm, n_folds, *args):
 ################# 构造随机森林的一些方法  结束 #################
 
 ################# 随机森林测试 开始 #################
-# Test CART on Bank Note dataset
+# 开始
 # 加载数据
 filename = 'D:\sonar.all-data.csv'
 dataset = load_csv(filename)
